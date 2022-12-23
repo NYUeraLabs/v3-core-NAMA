@@ -1,22 +1,22 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity =0.7.6;
 
-import './interfaces/IUniswapV3Factory.sol';
+import './interfaces/NAMAFactory.sol';
 
-import './UniswapV3PoolDeployer.sol';
+import './NAMAPoolDeployer.sol';
 import './NoDelegateCall.sol';
 
-import './UniswapV3Pool.sol';
+import './NAMAPool.sol';
 
 /// @title Canonical Uniswap V3 factory
-/// @notice Deploys Uniswap V3 pools and manages ownership and control over pool protocol fees
-contract UniswapV3Factory is IUniswapV3Factory, UniswapV3PoolDeployer, NoDelegateCall {
-    /// @inheritdoc IUniswapV3Factory
+/// @notice Deploys NAMA pools and manages ownership and control over pool protocol fees
+contract NAMAFactory is INAMAFactory, NAMAPoolDeployer, NoDelegateCall {
+    /// @inheritdoc INAMAFactory
     address public override owner;
 
-    /// @inheritdoc IUniswapV3Factory
+    /// @inheritdoc INAMAFactory
     mapping(uint24 => int24) public override feeAmountTickSpacing;
-    /// @inheritdoc IUniswapV3Factory
+    /// @inheritdoc INAMAFactory
     mapping(address => mapping(address => mapping(uint24 => address))) public override getPool;
 
     constructor() {
@@ -31,7 +31,7 @@ contract UniswapV3Factory is IUniswapV3Factory, UniswapV3PoolDeployer, NoDelegat
         emit FeeAmountEnabled(10000, 200);
     }
 
-    /// @inheritdoc IUniswapV3Factory
+    /// @inheritdoc INAMAFactory
     function createPool(
         address tokenA,
         address tokenB,
@@ -50,14 +50,14 @@ contract UniswapV3Factory is IUniswapV3Factory, UniswapV3PoolDeployer, NoDelegat
         emit PoolCreated(token0, token1, fee, tickSpacing, pool);
     }
 
-    /// @inheritdoc IUniswapV3Factory
+    /// @inheritdoc INAMAFactory
     function setOwner(address _owner) external override {
         require(msg.sender == owner);
         emit OwnerChanged(owner, _owner);
         owner = _owner;
     }
 
-    /// @inheritdoc IUniswapV3Factory
+    /// @inheritdoc INAMAFactory
     function enableFeeAmount(uint24 fee, int24 tickSpacing) public override {
         require(msg.sender == owner);
         require(fee < 1000000);

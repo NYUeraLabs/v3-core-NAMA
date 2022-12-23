@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: BUSL-1.1
 pragma solidity =0.7.6;
 
-import './interfaces/IUniswapV3Pool.sol';
+import './interfaces/INAMAPool.sol';
 
 import './NoDelegateCall.sol';
 
@@ -20,12 +20,12 @@ import './libraries/LiquidityMath.sol';
 import './libraries/SqrtPriceMath.sol';
 import './libraries/SwapMath.sol';
 
-import './interfaces/IUniswapV3PoolDeployer.sol';
-import './interfaces/IUniswapV3Factory.sol';
+import './interfaces/INAMAPoolDeployer.sol';
+import './interfaces/INAMAFactory.sol';
 import './interfaces/IERC20Minimal.sol';
-import './interfaces/callback/IUniswapV3MintCallback.sol';
-import './interfaces/callback/IUniswapV3SwapCallback.sol';
-import './interfaces/callback/IUniswapV3FlashCallback.sol';
+import './interfaces/callback/INAMAMintCallback.sol';
+import './interfaces/callback/INAMASwapCallback.sol';
+import './interfaces/callback/INAMAFlashCallback.sol';
 
 contract UniswapV3Pool is IUniswapV3Pool, NoDelegateCall {
     using LowGasSafeMath for uint256;
