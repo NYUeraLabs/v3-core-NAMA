@@ -8,7 +8,7 @@ import './NoDelegateCall.sol';
 
 import './NAMAPool.sol';
 
-/// @title Canonical Uniswap V3 factory
+/// @title Canonical NAMA V1 factory
 /// @notice Deploys NAMA pools and manages ownership and control over pool protocol fees
 contract NAMAFactory is INAMAFactory, NAMAPoolDeployer, NoDelegateCall {
     /// @inheritdoc INAMAFactory
